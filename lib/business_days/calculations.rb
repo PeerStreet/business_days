@@ -12,7 +12,7 @@ module BusinessDays
     end
 
     def is_business_day?
-      ! [0,6].include?(self.wday) && ! holiday?
+      ! [0,6].include?(self.wday) && ! Config.holidays.include?(self.to_date)
     end
 
     def plus_with_business_days(other)
@@ -29,10 +29,6 @@ module BusinessDays
       else
         minus_without_business_days(other)
       end
-    end
-
-    def holiday?
-      Config.holidays.include?(self.to_date)
     end
   end
 end
